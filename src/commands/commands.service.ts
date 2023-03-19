@@ -5,7 +5,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Command } from './schemas/commands.schema';
 import { CommandsDocument } from './schemas/commands.schema';
-import { response } from 'express';
 
 @Injectable()
 export class CommandsService {
@@ -19,7 +18,7 @@ export class CommandsService {
   }
 
   findAll() {
-    return response.json(this.commandModel.find().exec());
+    return this.commandModel.find().exec();
   }
 
   findOne(id: number) {
