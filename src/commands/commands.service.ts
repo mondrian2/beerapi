@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Command } from './schemas/commands.schema';
 import { CommandsDocument } from './schemas/commands.schema';
+import { response } from 'express';
 
 @Injectable()
 export class CommandsService {
@@ -13,12 +14,12 @@ export class CommandsService {
   ) {}
 
   async create(createCommandDto: CreateCommandDto) {
-     const createdCommands = new this.commandModel(createCommandDto);
-     return createdCommands.save();
+    const createdCommands = new this.commandModel(createCommandDto);
+    return createdCommands.save();
   }
 
   findAll() {
-    return this.commandModel.find().exec();
+    return response.json(this.commandModel.find().exec());
   }
 
   findOne(id: number) {
